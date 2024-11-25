@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balaji Auto and Tyres - Customer Entry</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f4f6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2a9d8f;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #23877e;
+    }
+
+    #thankYouMessage {
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Balaji Auto and Tyres</h1>
+    <form id="customerForm" onsubmit="submitForm(event)">
+      <label for="customerName">Customer Name:</label>
+      <input type="text" id="customerName" required>
+
+      <label for="contactNumber">Contact Number:</label>
+      <input type="tel" id="contactNumber" required>
+
+      <label for="vehicleName">Vehicle Name:</label>
+      <input type="text" id="vehicleName" required>
+
+      <label for="vehicleNumber">Vehicle Number:</label>
+      <input type="text" id="vehicleNumber" required>
+
+      <label for="kilometers">Kilometers:</label>
+      <input type="number" id="kilometers" required>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="thankYouMessage" style="display:none;">Thank you for your submission!</p>
+  </div>
+
+  <script>
+    async function submitForm(event) {
+      event.preventDefault();
+
+      const formData = {
+        customerName: document.getElementById('customerName').value,
+        contactNumber: document.getElementById('contactNumber').value,
+        vehicleName: document.getElementById('vehicleName').value,
+        vehicleNumber: document.getElementById('vehicleNumber').value,
+        kilometers: document.getElementById('kilometers').value,
+      };
+
+      const response = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        document.getElementById('customerForm').reset();
+        document.getElementById('thankYouMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('thankYouMessage').style.display = 'none';
+        }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
