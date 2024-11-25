@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balaji Auto and Tyres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .thank-you {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Balaji Auto and Tyres</h1>
+        <form id="autoForm">
+            <label for="customerName">Customer Name</label>
+            <input type="text" id="customerName" name="customerName" required>
+
+            <label for="contactNumber">Customer Contact Number</label>
+            <input type="tel" id="contactNumber" name="contactNumber" required>
+
+            <label for="vehicleName">Vehicle Name</label>
+            <input type="text" id="vehicleName" name="vehicleName" required>
+
+            <label for="vehicleNumber">Vehicle Number</label>
+            <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+
+            <label for="kilometers">Kilometers</label>
+            <input type="number" id="kilometers" name="kilometers" required>
+
+            <label for="remarks">Remarks</label>
+            <input type="text" id="remarks" name="remarks" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="thank-you" id="thankYouMessage">
+            <p>Thank you! Your data has been submitted successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('autoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const customerName = document.getElementById('customerName').value;
+            const contactNumber = document.getElementById('contactNumber').value;
+            const vehicleName = document.getElementById('vehicleName').value;
+            const vehicleNumber = document.getElementById('vehicleNumber').value;
+            const kilometers = document.getElementById('kilometers').value;
+            const remarks = document.getElementById('remarks').value;
+
+            const formData = {
+                customerName,
+                contactNumber,
+                vehicleName,
+                vehicleNumber,
+                kilometers,
+                remarks
+            };
+
+            fetch('/submitForm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('thankYouMessage').style.display = 'block';
+                    document.getElementById('autoForm').reset();
+                    setTimeout(() => {
+                        document.getElementById('thankYouMessage').style.display = 'none';
+                    }, 5000);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+</html>
