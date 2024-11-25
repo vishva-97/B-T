@@ -1,130 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balaji Auto and Tyres</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input[type="text"], input[type="number"], input[type="tel"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .thank-you {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-            color: green;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balaji Auto and Tyres</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff5f6d, #ffc371);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      font-size: 1em;
+    }
+    button {
+      background: #ff5f6d;
+      border: none;
+      padding: 15px;
+      color: #fff;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #ffc371;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+    .popup h2 {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Balaji Auto and Tyres</h1>
+    <form id="customerForm">
+      <label for="name">Customer Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter customer name" required>
 
-    <div class="container">
-        <h1>Balaji Auto and Tyres</h1>
-        <form id="autoForm">
-            <label for="customerName">Customer Name</label>
-            <input type="text" id="customerName" name="customerName" required>
+      <label for="contact">Contact Number</label>
+      <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required>
 
-            <label for="contactNumber">Customer Contact Number</label>
-            <input type="tel" id="contactNumber" name="contactNumber" required>
+      <label for="vehicle">Vehicle Name</label>
+      <input type="text" id="vehicle" name="vehicle" placeholder="Enter vehicle name" required>
 
-            <label for="vehicleName">Vehicle Name</label>
-            <input type="text" id="vehicleName" name="vehicleName" required>
+      <label for="vehicleNumber">Vehicle Number</label>
+      <input type="text" id="vehicleNumber" name="vehicleNumber" placeholder="Enter vehicle number" required>
 
-            <label for="vehicleNumber">Vehicle Number</label>
-            <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+      <label for="kilometers">Kilometers</label>
+      <input type="number" id="kilometers" name="kilometers" placeholder="Enter kilometers" required>
 
-            <label for="kilometers">Kilometers</label>
-            <input type="number" id="kilometers" name="kilometers" required>
+      <label for="remarks">Remarks</label>
+      <textarea id="remarks" name="remarks" placeholder="Enter remarks" rows="4"></textarea>
 
-            <label for="remarks">Remarks</label>
-            <input type="text" id="remarks" name="remarks" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
-            <button type="submit">Submit</button>
-        </form>
+  <div class="popup" id="thankYouPopup">
+    <h2>Thank you! Details submitted successfully.</h2>
+  </div>
 
-        <div class="thank-you" id="thankYouMessage">
-            <p>Thank you! Your data has been submitted successfully.</p>
-        </div>
-    </div>
+  <script>
+    document.getElementById('customerForm').addEventListener('submit', function (event) {
+      event.preventDefault();
 
-    <script>
-        document.getElementById('autoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+      const popup = document.getElementById('thankYouPopup');
+      const formData = new FormData(this);
 
-            const customerName = document.getElementById('customerName').value;
-            const contactNumber = document.getElementById('contactNumber').value;
-            const vehicleName = document.getElementById('vehicleName').value;
-            const vehicleNumber = document.getElementById('vehicleNumber').value;
-            const kilometers = document.getElementById('kilometers').value;
-            const remarks = document.getElementById('remarks').value;
+      fetch('https://your-backend-api-url.com/submit', {
+        method: 'POST',
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Show popup
+        popup.style.display = 'block';
+        setTimeout(() => popup.style.display = 'none', 3000);
 
-            const formData = {
-                customerName,
-                contactNumber,
-                vehicleName,
-                vehicleNumber,
-                kilometers,
-                remarks
-            };
-
-            fetch('/submitForm', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('thankYouMessage').style.display = 'block';
-                    document.getElementById('autoForm').reset();
-                    setTimeout(() => {
-                        document.getElementById('thankYouMessage').style.display = 'none';
-                    }, 5000);
-                }
-            })
-            .catch(error => console.error('Error:', error));
+        // Send SMS
+        fetch('https://sms-api-url.com/send', {
+          method: 'POST',
+          body: JSON.stringify({ message: 'Thank you for your entry!', contact: formData.get('contact') }),
+          headers: { 'Content-Type': 'application/json' }
         });
-    </script>
-
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
 </body>
 </html>
