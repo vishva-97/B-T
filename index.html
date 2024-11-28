@@ -66,46 +66,58 @@
 </footer>
 
 <script>
-    function submitForm() {
-        const customerName = document.getElementById('customerName').value;
-        const contactNumber = document.getElementById('contactNumber').value;
-        const vehicleName = document.getElementById('vehicleName').value;
-        const vehicleNumber = document.getElementById('vehicleNumber').value;
-        const kilometers = document.getElementById('kilometers').value;
-        const remark = document.getElementById('remark').value;
+   function submitForm() {
+  // Get the values from the form
+  const customerName = document.getElementById('customerName').value;
+  const contactNumber = document.getElementById('contactNumber').value;
+  const vehicleName = document.getElementById('vehicleName').value;
+  const vehicleNumber = document.getElementById('vehicleNumber').value;
+  const kilometers = document.getElementById('kilometers').value;
+  const remark = document.getElementById('remark').value;
 
-        const data = {
-            customerName,
-            contactNumber,
-            vehicleName,
-            vehicleNumber,
-            kilometers,
-            remark
-        };
+  const data = {
+    customerName,
+    contactNumber,
+    vehicleName,
+    vehicleNumber,
+    kilometers,
+    remark
+  };
 
-        fetch('https://script.google.com/macros/s/AKfycbyYhU8EE2d2ZUCc1SEUJavRG8mQdz_UBj4PBQXNS4Vh/dev', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                document.getElementById('responseMessage').innerHTML = `Thank you, ${contactNumber}! Your data has been entered successfully.`;
-                resetForm();
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+  // Send the data to the Google Apps Script web app using POST
+  fetch('https://script.google.com/macros/s/AKfycbx8x6-mc1rjRRNx1k8EWMOhoaM_LocenER4VRiRRX1cgigYMGHCnS_nEV9Hp1WFJwI-Eg/exec', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.result === 'success') {
+      // Display success message
+      document.getElementById('responseMessage').innerHTML = `Thank you, ${contactNumber}! Your data has been entered successfully.`;
+      
+      // Reset the form after successful submission
+      resetForm();
+    } else {
+      // Display error message if something went wrong
+      document.getElementById('responseMessage').innerHTML = 'There was an error processing your request.';
     }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    // Display error message if network request fails
+    document.getElementById('responseMessage').innerHTML = 'Network error, please try again.';
+  });
+}
 
-    function resetForm() {
-        document.getElementById('customerForm').reset();
-        document.getElementById('responseMessage').innerHTML = '';
-    }
+// Reset the form fields after submission
+function resetForm() {
+  document.getElementById('customerForm').reset();
+  document.getElementById('responseMessage').innerHTML = '';  // Clear any displayed message
+}
+
 </script>
 
 </body>
