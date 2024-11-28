@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balaji Auto and Tyres Workshop</title>
     <style>
-        /* Global Reset */
+        /* Global reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,18 +15,19 @@
         /* Body and background */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f4f7f6;
             color: #333;
             line-height: 1.6;
-            padding: 0;
-            margin: 0;
+            background-image: url('https://www.publicdomainpictures.net/pictures/30000/velka/road-pavement-1452393346UvD.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         /* Header */
         header {
-            background-color: #282828;
+            background-color: rgba(0, 0, 0, 0.6);
             color: #fff;
-            padding: 30px 0;
+            padding: 40px 0;
             text-align: center;
         }
 
@@ -35,42 +36,11 @@
             font-family: 'Verdana', sans-serif;
             text-transform: uppercase;
             letter-spacing: 3px;
+            margin-bottom: 10px;
         }
 
         header p {
             font-size: 1.5rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Royal Enfield logo and animated tyre */
-        .logo-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 20px auto;
-            animation: logo-spin 3s linear infinite;
-        }
-
-        @keyframes logo-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .tyre {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background-color: #000;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: tyre-move 3s ease-in-out infinite;
-        }
-
-        @keyframes tyre-move {
-            0% { left: -100px; }
-            100% { left: 100vw; }
         }
 
         /* Form Container */
@@ -78,16 +48,16 @@
             width: 50%;
             margin: 40px auto;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            backdrop-filter: blur(10px);
         }
 
         .form-container h2 {
             text-align: center;
-            font-family: 'Arial', sans-serif;
             font-size: 2rem;
-            color: #282828;
+            color: #333;
             margin-bottom: 20px;
         }
 
@@ -98,6 +68,7 @@
         label {
             font-size: 1.2rem;
             font-weight: bold;
+            display: block;
         }
 
         input[type="text"],
@@ -115,34 +86,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #282828;
-            color: #fff;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #444;
-        }
-
-        footer {
-            background-color: #282828;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Form Reset */
-        .reset-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #d9534f;
+            background-color: #28a745;
             color: white;
             font-size: 1.2rem;
             border: none;
@@ -151,19 +95,44 @@
             transition: background-color 0.3s ease;
         }
 
-        .reset-btn:hover {
-            background-color: #c9302c;
+        button:hover {
+            background-color: #218838;
         }
+
+        /* Reset button */
+        .reset-btn {
+            background-color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .reset-btn:hover {
+            background-color: #c82333;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+        }
+
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-container">
-        <div class="tyre"></div>
-    </div>
     <h1>Balaji Auto and Tyres Workshop</h1>
-    <p>Your trusted auto repair & tyre service center</p>
+    <p>Your Travel Companion for Vehicle Maintenance</p>
 </header>
 
 <!-- Customer Form -->
@@ -209,7 +178,7 @@
     <p>&copy; 2024 Balaji Auto and Tyres. All rights reserved.</p>
 </footer>
 
-<!-- JavaScript for form handling -->
+<!-- JavaScript for form handling and Excel generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 <script>
