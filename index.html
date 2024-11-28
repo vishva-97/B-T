@@ -5,142 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balaji Auto and Tyres Workshop</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        /* Global Reset */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            text-align: center;
-            padding: 50px;
-            background-color: #1a1a1a;
-            color: white;
-        }
-        header h1 {
-            font-size: 3em;
+
+        /* Body and background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
             margin: 0;
         }
+
+        /* Header */
+        header {
+            background-color: #282828;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-family: 'Verdana', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
         header p {
-            font-size: 1.5em;
-            margin-top: 10px;
+            font-size: 1.5rem;
+            font-family: 'Arial', sans-serif;
         }
-        .logo {
+
+        /* Royal Enfield logo and animated tyre */
+        .logo-container {
+            position: relative;
             width: 100px;
-            animation: spin 2s linear infinite;
+            height: 100px;
+            margin: 20px auto;
+            animation: logo-spin 3s linear infinite;
         }
-        @keyframes spin {
+
+        @keyframes logo-spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
         .tyre {
-            width: 80px;
-            animation: tyre-spin 1s linear infinite;
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: tyre-move 3s ease-in-out infinite;
         }
-        @keyframes tyre-spin {
-            0% { transform: translateX(-100px) rotate(0deg); }
-            100% { transform: translateX(100vw) rotate(360deg); }
+
+        @keyframes tyre-move {
+            0% { left: -100px; }
+            100% { left: 100vw; }
         }
-        .container {
+
+        /* Form Container */
+        .form-container {
             width: 50%;
-            margin: 30px auto;
+            margin: 40px auto;
             padding: 20px;
-            background-color: white;
+            background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
+
+        .form-container h2 {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 2rem;
+            color: #282828;
+            margin-bottom: 20px;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         label {
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
-        input[type="text"], input[type="number"], input[type="tel"], textarea {
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        textarea {
             width: 100%;
             padding: 10px;
-            font-size: 1em;
-            margin: 8px 0;
+            margin-top: 8px;
+            font-size: 1rem;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #282828;
+            color: #fff;
+            font-size: 1.2rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: #444;
         }
+
         footer {
+            background-color: #282828;
+            color: #fff;
             text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 15px;
+            padding: 20px;
             position: fixed;
             width: 100%;
             bottom: 0;
         }
-        .form-container {
-            text-align: center;
+
+        /* Form Reset */
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #d9534f;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background-color: #c9302c;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="bike_logo.png" alt="Bike Logo" class="logo">
+    <div class="logo-container">
+        <div class="tyre"></div>
+    </div>
     <h1>Balaji Auto and Tyres Workshop</h1>
     <p>Your trusted auto repair & tyre service center</p>
 </header>
 
+<!-- Customer Form -->
 <div class="form-container">
-    <div class="container">
-        <h2>Customer Service Form</h2>
-        <form id="customerForm" action="javascript:void(0)" method="POST">
-            <div class="form-group">
-                <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" name="customerName" required>
-            </div>
-            <div class="form-group">
-                <label for="contactNumber">Contact Number</label>
-                <input type="tel" id="contactNumber" name="contactNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="vehicleName">Vehicle Name</label>
-                <input type="text" id="vehicleName" name="vehicleName" required>
-            </div>
-            <div class="form-group">
-                <label for="vehicleNumber">Vehicle Number</label>
-                <input type="text" id="vehicleNumber" name="vehicleNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="kilometers">Kilometers</label>
-                <input type="number" id="kilometers" name="kilometers" required>
-            </div>
-            <div class="form-group">
-                <label for="remark">Remark</label>
-                <textarea id="remark" name="remark" rows="4" required></textarea>
-            </div>
-            <button type="submit" onclick="submitForm()">Submit</button>
-        </form>
-    </div>
-</div>
+    <h2>Customer Service Form</h2>
+    <form id="customerForm">
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" id="customerName" name="customerName" required>
+        </div>
 
-<!-- Animation for tyre -->
-<div class="tyre"></div>
+        <div class="form-group">
+            <label for="contactNumber">Contact Number</label>
+            <input type="tel" id="contactNumber" name="contactNumber" required>
+        </div>
+
+        <div class="form-group">
+            <label for="vehicleName">Vehicle Name</label>
+            <input type="text" id="vehicleName" name="vehicleName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="vehicleNumber">Vehicle Number</label>
+            <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+        </div>
+
+        <div class="form-group">
+            <label for="kilometers">Kilometers</label>
+            <input type="number" id="kilometers" name="kilometers" required>
+        </div>
+
+        <div class="form-group">
+            <label for="remark">Remark</label>
+            <textarea id="remark" name="remark" rows="4" required></textarea>
+        </div>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
+    </form>
+</div>
 
 <footer>
     <p>&copy; 2024 Balaji Auto and Tyres. All rights reserved.</p>
 </footer>
 
+<!-- JavaScript for form handling -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
 <script>
-    // Handle form submission
+    // Function to handle form submission and save to Excel
     function submitForm() {
         const customerName = document.getElementById('customerName').value;
         const contactNumber = document.getElementById('contactNumber').value;
@@ -158,20 +231,21 @@
             remark
         };
 
-        // Save to an Excel file using a third-party library (e.g., SheetJS)
-        const XLSX = window.XLSX;
-        const ws = XLSX.utils.json_to_sheet([data]);
+        // Convert data to Excel format using SheetJS
         const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet([data]);
         XLSX.utils.book_append_sheet(wb, ws, 'Customer Data');
         XLSX.writeFile(wb, 'customer_data.xlsx');
 
-        // Reset form
+        // Reset the form after submitting
+        resetForm();
+    }
+
+    // Function to reset the form
+    function resetForm() {
         document.getElementById('customerForm').reset();
     }
 </script>
-
-<!-- SheetJS library for handling Excel -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 </body>
 </html>
